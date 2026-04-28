@@ -1,273 +1,326 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Pablo Dueñas | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        html {
-            scroll-behavior: smooth;
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .glass {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(234, 179, 8, 0.1) 0%, rgba(0, 0, 0, 0) 50%);
+        }
+
+        .blob {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #eab308 0%, #ec4899 100%);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.2;
         }
     </style>
 </head>
 
-<body class="bg-gray-950 text-gray-100 font-sans">
+<body class="bg-gray-950 text-gray-100 overflow-x-hidden">
 
-    <header class="fixed w-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900/90 backdrop-blur-md shadow-xl z-50">
-        <nav class="container mx-auto flex justify-between items-center py-4 px-6">
-      
-          <!-- Logo -->
-          <h1 class="text-2xl md:text-3xl font-extrabold transition-all cursor-pointer ">
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-pink-500">Pablo.DuDi</span>
-          </h1>
-      
-          <!-- Menu Desktop -->
-          <ul class="hidden md:flex gap-8 font-semibold text-gray-100">
-            <li class="relative group">
-              <a href="#inicio" class="transition-colors">Inicio</a>
-              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
-            </li>
-            <li class="relative group">
-              <a href="#proyectos" class="transition-colors">Proyectos</a>
-              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
-            </li>
-            <li class="relative group">
-              <a href="#habilidades" class="transition-colors">Habilidades</a>
-              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
-            </li>
-            <li class="relative group">
-              <a href="#contacto" class="transition-colors">Contacto</a>
-              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all group-hover:w-full"></span>
-            </li>
-          </ul>
-      
-          <!-- Botones Desktop -->
-          <div class="hidden md:flex gap-4">
-            <a href="#contacto" class="px-4 py-2 rounded-full border-2 border-yellow-400 text-yellow-400 font-semibold hover:bg-yellow-400 hover:text-gray-900 transition">Contáctame</a>
-          </div>
-      
-          <!-- Hamburger Mobile -->
-          <div class="md:hidden">
-            <button id="menu-btn" class="text-yellow-400 focus:outline-none">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+    <div class="fixed inset-0 z-[-2] bg-[#050505]"></div>
+    <div class="fixed top-[-10%] left-[-10%] blob animate-pulse"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] blob animate-bounce" style="animation-duration: 10s;"></div>
+
+    <header class="fixed w-full top-0 z-50 px-6 py-4">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center glass px-6 py-3 rounded-2xl">
+            <h1 class="text-2xl font-extrabold tracking-tighter">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-500 italic">Pablo
+                    Dueñas</span>
+            </h1>
+
+            <ul class="hidden md:flex gap-8 text-sm font-medium">
+                <li><a href="#inicio" class="hover:text-yellow-400 transition">Inicio</a></li>
+                <li><a href="#proyectos" class="hover:text-yellow-400 transition">Proyectos</a></li>
+                <li><a href="#habilidades" class="hover:text-yellow-400 transition">Habilidades</a></li>
+            </ul>
+
+            <button id="menu-btn" class="md:hidden text-yellow-400">
+                <i class="fa-solid fa-bars text-2xl"></i>
             </button>
-          </div>
-      
         </nav>
-      
-        <!-- Menu Mobile -->
-        <ul id="menu" class="hidden flex-col md:hidden bg-gray-900/90 text-gray-100 font-semibold py-4 px-6 gap-4 absolute w-full left-0 top-full shadow-lg">
-          <li><a href="#inicio" class="hover:text-yellow-400 transition">Inicio</a></li>
-          <li><a href="#proyectos" class="hover:text-yellow-400 transition">Proyectos</a></li>
-          <li><a href="#habilidades" class="hover:text-yellow-400 transition">Habilidades</a></li>
-          <li><a href="#contacto" class="hover:text-yellow-400 transition">Contacto</a></li>
-        </ul>
-      </header>
-      
-      <!-- Script para togglear el menú mobile -->
-      <script>
-        const btn = document.getElementById('menu-btn');
-        const menu = document.getElementById('menu');
-        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
-      </script>
-      
-      
-      
-      
+    </header>
 
-    <!-- Hero -->
-    <section id="inicio"
-        class="min-h-screen flex items-center bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white ">
-        <div
-            class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 sm:px-6 lg:px-12 py-10">
+    <section id="inicio" class="min-h-screen flex items-center relative pt-20">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
-            <!-- Foto -->
-            <div class="flex justify-center md:justify-center w-full md:w-1/2 mb-8 md:mb-0 mt-8">
-                <img src="https://via.placeholder.com/350" alt="Foto Pablo Dueñas"
-                    class="rounded-full shadow-2xl w-48 h-48 sm:w-56 sm:h-56 md:w-72 md:h-72 object-cover border-4 border-yellow-400 hover:scale-105 transition-transform duration-300">
-            </div>
-
-            <!-- Texto -->
-            <div class="text-center md:text-left w-full md:w-1/2">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-pink-500">
-                        Pablo Dueñas Diez
-                    </span>
+            <div class="order-2 md:order-1 text-center md:text-left">
+                <span
+                    class="inline-block px-4 py-1 rounded-full bg-yellow-400/10 text-yellow-400 text-xs font-bold mb-4 border border-yellow-400/20 uppercase tracking-widest">
+                    Disponible para trabajar
+                </span>
+                <h2 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                    Construyo <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-pink-500 to-purple-500">experiencias</span>
+                    digitales.
                 </h2>
-                <p class="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
-                    Soy un <span class="font-semibold text-yellow-300">desarrollador web apasionado y orientado a resultados</span>, con experiencia en la creación de aplicaciones y sitios web modernos, eficientes y visualmente atractivos. Domino tecnologías como <span class="text-pink-400 font-semibold">HTML, CSS, Bootstrap y TailwindCSS</span> para construir interfaces intuitivas y responsivas, así como <span class="text-pink-400 font-semibold">JavaScript y jQuery</span> para desarrollar funcionalidades dinámicas y lógicas de negocio robustas.
-                    <br><br>
-                    Mi experiencia también incluye programación backend con <span class="text-pink-400 font-semibold">PHP</span> y bases de datos <span class="text-pink-400 font-semibold">MySQL</span>, así como el uso de <span class="text-pink-400 font-semibold">Ajax</span> para optimizar la comunicación asíncrona y mejorar la experiencia del usuario. Además, manejo control de versiones con <span class="text-pink-400 font-semibold">GitHub</span>, asegurando un flujo de trabajo colaborativo ordenado y seguro.
+                <p class="text-gray-400 text-lg md:text-xl mb-8 max-w-xl leading-relaxed">
+                    Soy <span class="text-white font-semibold">Pablo Dueñas Diez</span>, desarrollador Full Stack
+                    especializado en interfaces modernas y backend robusto. Mi enfoque mezcla la estética limpia con un
+                    código optimizado.
                 </p>
-
-                <!-- Botones CTA -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                     <a href="#proyectos"
-                        class="bg-yellow-400 text-gray-900 px-6 py-3 rounded-full font-semibold shadow hover:bg-yellow-300 transition text-sm sm:text-base">
-                        Ver proyectos
+                        class="bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-yellow-400 transition-all flex items-center gap-2">
+                        Ver Portafolio <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
-                    <a href="/assets/pdf/Curriculum Pablo Dueñas Diez.pdf" download
-                        class="border-2 border-yellow-400 px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 hover:text-gray-900 transition text-sm sm:text-base">
+                    <a href="./assets/pdf/CVPabloDueñasDiez.pdf" download="CV_Pablo_Duenas_2026.pdf"
+                        class="glass px-8 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all border border-white/10">
                         Descargar CV
                     </a>
                 </div>
             </div>
-
-        </div>
-    </section>
-  
-    <!-- Proyectos -->
-    <section id="proyectos" class="bg-gray-900 py-20 px-6">
-        <h2 class="text-4xl font-bold mb-10 text-center text-yellow-400">Proyectos</h2>
-        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <!-- Card -->
-            <div class="bg-gray-800 shadow-lg rounded-2xl overflow-hidden hover:scale-105 transform transition">
-                <img src="https://via.placeholder.com/600x400" alt="Proyecto 1" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2 text-white">Proyecto 1</h3>
-                    <p class="text-gray-400 mb-4">Descripción breve del proyecto.</p>
-                    <a href="#" class="text-yellow-400 font-semibold hover:underline">Ver más →</a>
-                </div>
-            </div>
-
-            <div class="bg-gray-800 shadow-lg rounded-2xl overflow-hidden hover:scale-105 transform transition">
-                <img src="https://via.placeholder.com/600x400" alt="Proyecto 2" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2 text-white">Proyecto 2</h3>
-                    <p class="text-gray-400 mb-4">Descripción breve del proyecto.</p>
-                    <a href="#" class="text-yellow-400 font-semibold hover:underline">Ver más →</a>
-                </div>
-            </div>
-
-            <div class="bg-gray-800 shadow-lg rounded-2xl overflow-hidden hover:scale-105 transform transition">
-                <img src="https://via.placeholder.com/600x400" alt="Proyecto 3" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2 text-white">Proyecto 3</h3>
-                    <p class="text-gray-400 mb-4">Descripción breve del proyecto.</p>
-                    <a href="#" class="text-yellow-400 font-semibold hover:underline">Ver más →</a>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <section id="habilidades" class="container mx-auto py-20 px-6">
-        <h2 class="text-4xl font-bold mb-12 text-center text-yellow-400">Habilidades</h2>
+    <section id="proyectos" class="py-24 bg-black/30">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <h2 class="text-4xl font-bold mb-2">Proyectos Destacados</h2>
+                    <div class="h-1.5 w-20 bg-yellow-400 rounded-full"></div>
+                </div>
+            </div>
 
-        <!-- Centramos el grid -->
-        <div class="flex justify-center">
-            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
-
-                <!-- HTML -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div
-                    class="relative p-[2px] rounded-xl bg-gradient-to-r from-yellow-400 to-pink-500 hover:scale-105 transition">
-                    <div
-                        class="bg-orange-300 rounded-xl w-24 h-24 flex flex-col items-center justify-center text-white">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-                            alt="HTML" class="w-10 h-10 mb-1">
+                    class="group relative bg-gray-900/50 rounded-3xl overflow-hidden border border-white/5 hover:border-yellow-400/50 transition-all duration-500">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="./assets/img/taskmaster.png"
+                            alt="TaskMaster Preview"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+
+                        <div class="absolute top-4 right-4">
+                            <span
+                                class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10">
+                                Backend Project
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-8">
+                        <div class="flex gap-2 mb-4">
+                            <span
+                                class="text-[10px] px-2 py-1 bg-purple-500/10 text-purple-500 border border-purple-500/20 rounded-md uppercase font-bold">
+                                React
+                            </span>
+                            <span
+                                class="text-[10px] px-2 py-1 bg-red-500/10 text-red-500 border border-red-500/20 rounded-md uppercase font-bold">
+                                Laravel
+                            </span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold mb-3 text-white">Task Master</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Gestor de tareas avanzado desarrollado con el framework Laravel. Incluye sistema de
+                            autenticación,
+                            operaciones CRUD completas y una arquitectura robusta basada en MVC.
+                        </p>
+
+                        <a href="https://github.com/Pablo-Duenas/TaskMaster" target="_blank"
+                            class="inline-flex items-center gap-2 text-yellow-400 font-bold text-sm hover:gap-3 transition-all">
+                            Ver código fuente
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
-
-                <!-- CSS -->
                 <div
-                    class="relative p-[2px] rounded-xl bg-gradient-to-r from-yellow-400 to-pink-500 hover:scale-105 transition">
-                    <div class="bg-blue-300 rounded-xl w-24 h-24 flex flex-col items-center justify-center text-white">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"
-                            class="w-10 h-10 mb-1">
+                    class="group relative bg-gray-900/50 rounded-3xl overflow-hidden border border-white/5 hover:border-fuchsia-500/50 transition-all duration-500">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="./assets/img/viralchallenge.png"
+                            alt="Viral Challenge Preview"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
 
+                        <div class="absolute top-4 right-4">
+                            <span
+                                class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10">
+                                Full Stack App
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-8">
+                        <div class="flex gap-2 mb-4">
+                            <span
+                                class="text-[10px] px-2 py-1 bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20 rounded-md uppercase font-bold">
+                                PHP
+                            </span>
+                            <span
+                                class="text-[10px] px-2 py-1 bg-blue-400/10 text-blue-400 border border-blue-400/20 rounded-md uppercase font-bold">
+                                JavaScript
+                            </span>
+                            <span
+                                class="text-[10px] px-2 py-1 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-md uppercase font-bold">
+                                Bootstrap
+                            </span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold mb-3 text-white">Viral Challenge</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Plataforma interactiva de retos diarios. Implementa una arquitectura
+                            <strong>Model-View-Controller (MVC)</strong> propia, con gestión de sesiones, validación de
+                            datos y una interfaz dinámica centrada en la experiencia de usuario.
+                        </p>
+
+                        <div class="flex items-center gap-6">
+                            <a href="https://github.com/hugocarni/VIRAL-CHALLENGE" target="_blank"
+                                class="inline-flex items-center gap-2 text-fuchsia-400 font-bold text-sm hover:gap-3 transition-all">
+                                ver codigo fuente
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- JavaScript -->
-                <div
-                    class="relative p-[2px] rounded-xl bg-gradient-to-r from-yellow-400 to-pink-500 hover:scale-105 transition">
+    <section id="habilidades" class="py-24">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-16">Stack Tecnológico</h2>
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="group flex flex-col items-center">
                     <div
-                        class="bg-yellow-200 rounded-xl w-24 h-24 flex flex-col items-center justify-center text-gray-900">
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-yellow-400 group-hover:shadow-[0_0_30px_rgba(234,179,8,0.2)] transition-all duration-300">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                            alt="JavaScript" class="w-10 h-10 mb-1">
+                            class="w-10 h-10" alt="JS">
                     </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">JavaScript</span>
                 </div>
 
-                <!-- PHP -->
-                <div
-                    class="relative p-[2px] rounded-xl bg-gradient-to-r from-yellow-400 to-pink-500 hover:scale-105 transition">
+                <div class="group flex flex-col items-center">
                     <div
-                        class="bg-purple-400 rounded-xl w-24 h-24 flex flex-col items-center justify-center text-white">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"
-                            class="w-10 h-10 mb-1">
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-indigo-400 group-hover:shadow-[0_0_30px_rgba(79,70,229,0.2)] transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+                            class="w-10 h-10" alt="PHP">
                     </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">PHP</span>
                 </div>
 
-                <!-- MySQL -->
-                <div
-                    class="relative p-[2px] rounded-xl bg-gradient-to-r from-yellow-400 to-pink-500 hover:scale-105 transition">
-                    <div class="bg-cyan-400 rounded-xl w-24 h-24 flex flex-col items-center justify-center text-white">
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-cyan-400 group-hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+                            class="w-10 h-10" alt="Tailwind">
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Tailwind</span>
+                </div>
+
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-blue-500 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.2)] transition-all duration-300">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                            alt="MySQL" class="w-10 h-10 mb-1">
+                            class="w-10 h-10" alt="SQL">
                     </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">SQL</span>
                 </div>
 
-                <!-- Java -->
-                <div
-                    class="relative p-[2px] rounded-xl bg-gradient-to-r from-yellow-400 to-pink-500 hover:scale-105 transition">
-                    <div class="bg-red-400 rounded-xl w-24 h-24 flex flex-col items-center justify-center text-white">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"
-                            class="w-10 h-10 mb-1">
-                    </div>
-                </div>
-
-                <!-- Bootstrap -->
-                <div
-                    class="relative p-[2px] rounded-xl bg-gradient-to-r from-yellow-400 to-pink-500 hover:scale-105 transition">
+                <div class="group flex flex-col items-center">
                     <div
-                        class="bg-purple-400 rounded-xl w-24 h-24 flex flex-col items-center justify-center text-white">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg"
-                            alt="Bootstrap" class="w-10 h-10 mb-1">
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-red-500 group-hover:shadow-[0_0_30px_rgba(239,68,68,0.2)] transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                            class="w-10 h-10" alt="Java">
                     </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Java</span>
                 </div>
 
-                <!-- GitHub -->
-                <div
-                    class="relative p-[2px] rounded-xl bg-gradient-to-r from-yellow-400 to-pink-500 hover:scale-105 transition">
-                    <div class="bg-gray-600 rounded-xl w-24 h-24 flex flex-col items-center justify-center text-white">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                            alt="GitHub" class="w-10 h-10 mb-1">
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-cyan-300 group-hover:shadow-[0_0_30px_rgba(103,232,249,0.2)] transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                            class="w-10 h-10" alt="React">
                     </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">React</span>
                 </div>
 
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-blue-400 group-hover:shadow-[0_0_30px_rgba(96,165,250,0.2)] transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                            class="w-10 h-10" alt="Python">
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Python</span>
+                </div>
 
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-red-600 group-hover:shadow-[0_0_30px_rgba(220,38,38,0.2)] transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
+                            class="w-10 h-10" alt="Laravel">
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Laravel</span>
+                </div>
 
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-orange-500 group-hover:shadow-[0_0_30px_rgba(249,115,22,0.2)] transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                            class="w-10 h-10" alt="HTML">
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">HTML5</span>
+                </div>
+
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-blue-600 group-hover:shadow-[0_0_30px_rgba(37,99,235,0.2)] transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                            class="w-10 h-10" alt="CSS">
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">CSS3</span>
+                </div>
+
+                <div class="group flex flex-col items-center">
+                    <div
+                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-purple-500 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] transition-all duration-300">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+                            class="w-10 h-10" alt="Bootstrap">
+                    </div>
+                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Bootstrap</span>
+                </div>
             </div>
         </div>
     </section>
 
 
-
-    <!-- Contacto -->
-    <section id="contacto" class="bg-gray-900 py-20 px-6">
-        <h2 class="text-4xl font-bold mb-10 text-center text-yellow-400">Contacto</h2>
-        <form class="max-w-xl mx-auto space-y-6">
-            <input type="text" placeholder="Nombre"
-                class="w-full border border-gray-600 bg-gray-800 text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400">
-            <input type="email" placeholder="Correo"
-                class="w-full border border-gray-600 bg-gray-800 text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400">
-            <textarea placeholder="Mensaje" rows="5"
-                class="w-full border border-gray-600 bg-gray-800 text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
-            <button type="submit"
-                class="w-full bg-yellow-400 text-gray-900 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">Enviar</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-400 py-6 text-center">
-        <p>© 2025 MiPortfolio. Todos los derechos reservados.</p>
+    <footer class="py-12 border-t border-white/5 text-center">
+        <p class="text-gray-500 text-sm italic">
+            Diseñado y desarrollado por Pablo Dueñas © 2026
+        </p>
     </footer>
 
+    <script>
+        const btn = document.getElementById('menu-btn');
+        // Aquí podrías añadir un menú móvil animado más pro
+    </script>
 </body>
 
 </html>
