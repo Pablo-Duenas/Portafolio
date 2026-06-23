@@ -4,463 +4,1319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pablo Dueñas | Portfolio</title>
+    <title>Pablo Dueñas | Full Stack Developer</title>
+    <meta name="description"
+        content="Portfolio de Pablo Dueñas Diez, desarrollador Full Stack especializado en interfaces modernas y backend robusto.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        :root {
+            --gold: #f5c842;
+            --gold-dim: rgba(245, 200, 66, 0.15);
+            --pink: #ec4899;
+            --purple: #a855f7;
+            --cyan: #22d3ee;
+            --bg: #050508;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.07);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: #e2e8f0;
+            overflow-x: hidden;
         }
 
-        .glass {
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        ::-webkit-scrollbar {
+            width: 4px;
         }
 
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(234, 179, 8, 0.1) 0%, rgba(0, 0, 0, 0) 50%);
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--gold), var(--pink));
+            border-radius: 2px;
+        }
+
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
         }
 
         .blob {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #eab308 0%, #ec4899 100%);
-            filter: blur(80px);
+            position: fixed;
             border-radius: 50%;
-            z-index: -1;
-            opacity: 0.2;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(245, 200, 66, 0.12) 0%, transparent 70%);
+            top: -150px;
+            left: -150px;
+            animation: blobFloat1 18s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+            bottom: -100px;
+            right: -100px;
+            animation: blobFloat2 22s ease-in-out infinite;
+        }
+
+        .blob-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: blobFloat3 15s ease-in-out infinite;
+        }
+
+        @keyframes blobFloat1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(80px, 60px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-40px, 80px) scale(0.9);
+            }
+        }
+
+        @keyframes blobFloat2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(-60px, -80px) scale(1.15);
+            }
+        }
+
+        @keyframes blobFloat3 {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.8;
+            }
+        }
+
+        .glass {
+            background: rgba(15, 15, 25, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.025);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(245, 200, 66, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5), 0 0 40px -10px rgba(245, 200, 66, 0.1);
+        }
+
+        .grad-gold {
+            background: linear-gradient(135deg, var(--gold), #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .grad-main {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--pink) 50%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #nav-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--pink), var(--purple));
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
+        #main-nav {
+            transition: all 0.3s ease;
+        }
+
+        #main-nav.scrolled {
+            background: rgba(5, 5, 10, 0.95);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-link {
+            position: relative;
+            color: #94a3b8;
+            transition: color 0.3s ease;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--pink));
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        #mobile-menu {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        #mobile-menu.open {
+            max-height: 400px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            background: var(--gold);
+            margin-left: 4px;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 100px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #4ade80;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .availability-dot {
+            width: 7px;
+            height: 7px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse-green 2s ease infinite;
+        }
+
+        @keyframes pulse-green {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
+            }
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(245, 200, 66, 0.3);
+            background: rgba(245, 200, 66, 0.05);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.6;
+        }
+
+        .project-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(245, 200, 66, 0.03) 100%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.08);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5, 5, 8, 0.9) 0%, rgba(5, 5, 8, 0.2) 50%, transparent 100%);
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: default;
+        }
+
+        .skill-icon-wrap {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .skill-item:hover .skill-icon-wrap {
+            transform: translateY(-6px) scale(1.1);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 30px rgba(245, 200, 66, 0.2);
+            border-color: rgba(245, 200, 66, 0.4);
+        }
+
+        .skill-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #64748b;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skill-item:hover .skill-label {
+            color: #e2e8f0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: -20px;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--pink));
+            box-shadow: 0 0 12px rgba(245, 200, 66, 0.5);
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-decoration: none;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(245, 200, 66, 0.3);
+            transform: translateX(6px);
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .footer-social {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: #64748b;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-social:hover {
+            background: rgba(245, 200, 66, 0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(245, 200, 66, 0.15), rgba(236, 72, 153, 0.15));
+            border: 1px solid rgba(245, 200, 66, 0.3);
+            color: var(--gold);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
     </style>
 </head>
 
-<body class="bg-gray-950 text-gray-100 overflow-x-hidden">
+<body>
+    <div id="nav-progress" style="width:0%"></div>
 
-    <div class="fixed inset-0 z-[-2] bg-[#050505]"></div>
-    <div class="fixed top-[-10%] left-[-10%] blob animate-pulse"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] blob animate-bounce" style="animation-duration: 10s;"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <canvas id="canvas-bg"></canvas>
 
-    <header class="fixed w-full top-0 z-50 px-6 py-4">
-        <nav class="max-w-7xl mx-auto flex justify-between items-center glass px-6 py-3 rounded-2xl">
-            <h1 class="text-2xl font-extrabold tracking-tighter">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-500 italic">Pablo
-                    Dueñas</span>
-            </h1>
+    <!-- NAVBAR -->
+    <header id="main-nav" class="fixed w-full top-0 z-50 py-4 px-6">
+        <nav class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="#inicio" class="flex items-center gap-2 group">
+                <div
+                    class="w-9 h-9 rounded-xl bg-gradient-to-br from-yellow-400 to-pink-500 flex items-center justify-center font-black text-black text-sm">
+                    P</div>
+                <span class="font-extrabold text-white tracking-tight">Pablo <span
+                        class="grad-gold">Dueñas</span></span>
+            </a>
 
-            <ul class="hidden md:flex gap-8 text-sm font-medium">
-                <li><a href="#inicio" class="hover:text-yellow-400 transition">Inicio</a></li>
-                <li><a href="#proyectos" class="hover:text-yellow-400 transition">Proyectos</a></li>
-                <li><a href="#habilidades" class="hover:text-yellow-400 transition">Habilidades</a></li>
+            <ul class="hidden md:flex items-center gap-8">
+                <li><a href="#inicio" class="nav-link" id="link-inicio">Inicio</a></li>
+                <li><a href="#sobre-mi" class="nav-link" id="link-sobre-mi">Sobre mí</a></li>
+                <li><a href="#proyectos" class="nav-link" id="link-proyectos">Proyectos</a></li>
+                <li><a href="#habilidades" class="nav-link" id="link-habilidades">Skills</a></li>
+                <li><a href="#contacto" class="nav-link" id="link-contacto">Contacto</a></li>
             </ul>
 
-            <button id="menu-btn" class="md:hidden text-yellow-400">
-                <i class="fa-solid fa-bars text-2xl"></i>
-            </button>
+            <div class="flex items-center gap-3">
+                <a href="./assets/pdf/CVPabloDueñasDiez.pdf" download="CV_Pablo_Duenas_2026.pdf"
+                    class="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-400 to-orange-400 text-black text-sm font-bold hover:brightness-110 transition-all">
+                    <i class="fa-solid fa-download text-xs"></i> CV
+                </a>
+                <button id="menu-btn"
+                    class="md:hidden w-10 h-10 rounded-xl glass flex items-center justify-center text-white"
+                    aria-label="Menú">
+                    <i class="fa-solid fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
         </nav>
+
+        <div id="mobile-menu" class="md:hidden max-w-6xl mx-auto mt-2">
+            <div class="glass rounded-2xl p-4 flex flex-col gap-1">
+                <a href="#inicio"
+                    class="mobile-nav-link px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition text-sm font-semibold">Inicio</a>
+                <a href="#sobre-mi"
+                    class="mobile-nav-link px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition text-sm font-semibold">Sobre
+                    mí</a>
+                <a href="#proyectos"
+                    class="mobile-nav-link px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition text-sm font-semibold">Proyectos</a>
+                <a href="#habilidades"
+                    class="mobile-nav-link px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition text-sm font-semibold">Skills</a>
+                <a href="#contacto"
+                    class="mobile-nav-link px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition text-sm font-semibold">Contacto</a>
+                <a href="./assets/pdf/CVPabloDueñasDiez.pdf" download
+                    class="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold text-sm text-center">Descargar
+                    CV</a>
+            </div>
+        </div>
     </header>
 
-    <section id="inicio" class="min-h-screen flex items-center relative pt-20">
-        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    <!-- HERO -->
+    <section id="inicio" class="min-h-screen flex items-center relative pt-24 pb-16">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
 
-            <div class="order-2 md:order-1 text-center md:text-left">
-                <span
-                    class="inline-block px-4 py-1 rounded-full bg-yellow-400/10 text-yellow-400 text-xs font-bold mb-4 border border-yellow-400/20 uppercase tracking-widest">
-                    Disponible para trabajar
-                </span>
-                <h2 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
-                    Construyo <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-pink-500 to-purple-500">experiencias</span>
-                    digitales.
-                </h2>
-                <p class="text-gray-400 text-lg md:text-xl mb-8 max-w-xl leading-relaxed">
-                    Soy <span class="text-white font-semibold">Pablo Dueñas Diez</span>, desarrollador Full Stack
-                    especializado en interfaces modernas y backend robusto. Mi enfoque mezcla la estética limpia con un
-                    código optimizado.
-                </p>
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <a href="#proyectos"
-                        class="bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-yellow-400 transition-all flex items-center gap-2">
-                        Ver Proyectos <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </a>
-                    <a href="./assets/pdf/CVPabloDueñasDiez.pdf" download="CV_Pablo_Duenas_2026.pdf"
-                        class="glass px-8 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all border border-white/10">
-                        Descargar CV
-                    </a>
+                <div class="space-y-8 reveal">
+                    <div class="availability-badge">
+                        <div class="availability-dot"></div>
+                        Disponible para trabajar
+                    </div>
+
+                    <div>
+                        <p class="code-font text-yellow-400/70 text-sm mb-3 tracking-widest">// Hola, soy</p>
+                        <h1 class="text-5xl md:text-6xl xl:text-7xl font-extrabold leading-[1.08] tracking-tight">
+                            Pablo<br>
+                            <span class="grad-main">Dueñas.</span>
+                        </h1>
+                    </div>
+
+                    <p class="text-slate-400 text-lg leading-relaxed max-w-md">
+                        Desarrollador <span class="text-white font-semibold">Full Stack</span> especializado en
+                        construir <span id="typing-text" class="text-yellow-400 font-semibold"></span><span
+                            class="cursor"></span>
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#proyectos" id="btn-ver-proyectos"
+                            class="group inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-7 py-3.5 rounded-2xl font-bold hover:brightness-110 transition-all shadow-lg shadow-yellow-400/20">
+                            Ver Proyectos
+                            <i
+                                class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#contacto" id="btn-contactar"
+                            class="inline-flex items-center gap-2 glass px-7 py-3.5 rounded-2xl font-bold hover:border-yellow-400/30 hover:bg-white/5 transition-all">
+                            Contactar
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 pt-4">
+                        <div class="stat-card reveal reveal-delay-1">
+                            <div class="text-2xl font-extrabold grad-gold" data-target="4">0</div>
+                            <div class="text-xs text-slate-500 mt-1 font-semibold uppercase tracking-wider">Proyectos
+                            </div>
+                        </div>
+                        <div class="stat-card reveal reveal-delay-2">
+                            <div class="text-2xl font-extrabold grad-gold" data-target="14">0</div>
+                            <div class="text-xs text-slate-500 mt-1 font-semibold uppercase tracking-wider">Tecnologías
+                            </div>
+                        </div>
+                        <div class="stat-card reveal reveal-delay-3">
+                            <div class="text-2xl font-extrabold grad-gold" data-target="1">0</div>
+                            <div class="text-xs text-slate-500 mt-1 font-semibold uppercase tracking-wider">Años exp.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center md:justify-end reveal reveal-delay-2">
+                    <div class="relative">
+                        <div
+                            class="absolute -inset-6 rounded-[40px] bg-gradient-to-br from-yellow-400/20 via-pink-500/10 to-purple-500/20 blur-xl">
+                        </div>
+                        <div class="relative w-72 glass rounded-[32px] p-6 shadow-2xl">
+                            <div
+                                class="w-24 h-24 rounded-2xl bg-gradient-to-br from-yellow-400 to-pink-500 flex items-center justify-center text-black text-4xl font-black mx-auto mb-4">
+                                P</div>
+                            <div class="text-center mb-4">
+                                <p class="font-bold text-white text-lg">Pablo Dueñas Diez</p>
+                                <p class="text-slate-400 text-sm">Full Stack Developer</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 justify-center mb-5">
+                                <span
+                                    class="tag bg-yellow-400/10 text-yellow-400 border border-yellow-400/20">React</span>
+                                <span class="tag bg-pink-500/10 text-pink-400 border border-pink-500/20">Laravel</span>
+                                <span class="tag bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Node.js</span>
+                                <span
+                                    class="tag bg-purple-500/10 text-purple-400 border border-purple-500/20">TypeScript</span>
+                            </div>
+                            <div class="bg-black/30 rounded-2xl p-3 flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
+                                    <i class="fa-solid fa-circle-check text-green-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white">Open to work</p>
+                                    <p class="text-[10px] text-slate-500">Full-time / Freelance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 animate-bounce">
+                <span class="text-xs font-semibold tracking-widest uppercase">Scroll</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi" class="py-28">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16 reveal">
+                <div class="section-label">Sobre mí</div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white">Quién soy</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-start">
+                <div class="space-y-6 reveal">
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-400">
+                                <i class="fa-solid fa-user-astronaut"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-lg">Mi historia</h3>
+                        </div>
+                        <p class="text-slate-400 leading-relaxed text-sm">
+                            Soy un desarrollador apasionado con formación en <strong class="text-white">Desarrollo de
+                                Aplicaciones Web</strong>.
+                            Me encanta transformar ideas en productos digitales que combinen estética impecable con
+                            código limpio y eficiente.
+                        </p>
+                        <p class="text-slate-400 leading-relaxed text-sm mt-3">
+                            Mi objetivo es seguir creciendo en el mundo del desarrollo, contribuyendo a proyectos
+                            desafiantes que me permitan
+                            aprender y aportar valor real.
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-pink-500/10 flex items-center justify-center text-pink-400">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <h3 class="font-bold text-white text-lg">Intereses</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag bg-white/5 text-slate-300 border border-white/10 py-1.5">UI/UX
+                                Design</span>
+                            <span class="tag bg-white/5 text-slate-300 border border-white/10 py-1.5">IA / ML</span>
+                            <span class="tag bg-white/5 text-slate-300 border border-white/10 py-1.5">Open Source</span>
+                            <span class="tag bg-white/5 text-slate-300 border border-white/10 py-1.5">Web
+                                Performance</span>
+                            <span
+                                class="tag bg-white/5 text-slate-300 border border-white/10 py-1.5">Arquitectura</span>
+                            <span class="tag bg-white/5 text-slate-300 border border-white/10 py-1.5">DevOps</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-8 reveal reveal-delay-2">
+                    <h3 class="font-bold text-white text-lg mb-2">Formación &amp; Trayectoria</h3>
+
+                    <!-- Google Cloud -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"
+                            style="background: linear-gradient(135deg, #f5c842, #f97316); box-shadow: 0 0 12px rgba(245,200,66,0.5);">
+                        </div>
+                        <div class="glass-card rounded-2xl p-5">
+                            <p class="code-font text-yellow-400/70 text-xs mb-1">Enero 2026 — Marzo 2026</p>
+                            <h4 class="font-bold text-white">Curso Superior en Google Cloud · Ingeniero de Datos</h4>
+                            <p class="text-slate-500 text-sm mb-2">CFTIC de Getafe</p>
+                            <p class="text-slate-400 text-xs leading-relaxed">
+                                Formación especializada en el ecosistema de datos en la nube: diseño de arquitecturas
+                                escalables, flujos de ingesta continua, almacenamiento masivo y
+                                automatización/supervisión de flujos de trabajo de datos.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- DAW -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"
+                            style="background: linear-gradient(135deg, #a855f7, #ec4899); box-shadow: 0 0 12px rgba(168,85,247,0.5);">
+                        </div>
+                        <div class="glass-card rounded-2xl p-5">
+                            <p class="code-font text-purple-400/70 text-xs mb-1">Septiembre 2023 — Junio 2025</p>
+                            <h4 class="font-bold text-white">FP Superior en Desarrollo de Aplicaciones Web (DAW)</h4>
+                            <p class="text-slate-500 text-sm mb-2">IES Gabriel García Márquez</p>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span
+                                    class="tag bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20 py-0.5">TFG:
+                                    Viral Challenge</span>
+                            </div>
+                            <p class="text-slate-400 text-xs leading-relaxed">
+                                Planificación e implementación de una aplicación web interactiva completa. Modelado de
+                                datos en MySQL, programación orientada a objetos en Backend mediante PHP/JavaScript y
+                                diseño adaptativo Frontend con estándares HTML5 y CSS3.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- SMR -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"
+                            style="background: linear-gradient(135deg, #22d3ee, #3b82f6); box-shadow: 0 0 12px rgba(34,211,238,0.5);">
+                        </div>
+                        <div class="glass-card rounded-2xl p-5">
+                            <p class="code-font text-cyan-400/70 text-xs mb-1">Septiembre 2021 — Junio 2023</p>
+                            <h4 class="font-bold text-white">FP Medio en Sistemas Microinformáticos y Redes (SMR)</h4>
+                            <p class="text-slate-500 text-sm mb-2">IES Laguna de Joatzel</p>
+                            <p class="text-slate-400 text-xs leading-relaxed">
+                                Bases sólidas en configuración de redes de datos, mantenimiento de equipamiento
+                                informático, diagnóstico de sistemas y soporte técnico de software.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="proyectos" class="py-24 bg-black/30">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-between items-end mb-16">
-                <div>
-                    <h2 class="text-4xl font-bold mb-2">Proyectos Destacados</h2>
-                    <div class="h-1.5 w-20 bg-yellow-400 rounded-full"></div>
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="py-28 bg-black/20">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16 reveal">
+                <div class="section-label">Portafolio</div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white">Proyectos Destacados</h2>
+                <p class="text-slate-500 mt-3 text-sm max-w-lg mx-auto">Cada proyecto es una historia de resolución de
+                    problemas y aprendizaje continuo.</p>
+            </div>
+
+            <!-- Featured -->
+            <div class="project-card mb-8 reveal" id="project-smartrecruit">
+                <div class="md:grid md:grid-cols-2 min-h-[380px]">
+                    <div class="relative h-56 md:h-auto overflow-hidden">
+                        <img src="./assets/img/smartRecruit.png" alt="SmartRecruit Preview" class="project-img">
+                        <div class="project-img-overlay"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="featured-badge"><i class="fa-solid fa-star text-[9px]"></i> Destacado</span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span
+                                class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10 font-bold">Next.js
+                                App</span>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-10 flex flex-col justify-center">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tag bg-blue-500/10 text-blue-400 border border-blue-500/20 py-1.5">React</span>
+                            <span
+                                class="tag bg-blue-400/10 text-blue-300 border border-blue-400/20 py-1.5">TypeScript</span>
+                            <span
+                                class="tag bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 py-1.5">OpenAI
+                                API</span>
+                            <span
+                                class="tag bg-slate-500/10 text-slate-300 border border-slate-500/20 py-1.5">Tailwind</span>
+                        </div>
+                        <h3 class="text-3xl font-extrabold text-white mb-3">SmartRecruit</h3>
+                        <p class="text-slate-400 leading-relaxed mb-6 text-sm">
+                            Optimizador de CVs impulsado por <strong class="text-white">Inteligencia
+                                Artificial</strong>. Analiza vacantes en tiempo real y reestructura perfiles
+                            profesionales para superar filtros <strong class="text-white">ATS</strong>.
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <a href="https://github.com/Pablo-Duenas/SmartRecruit" target="_blank"
+                                id="github-smartrecruit"
+                                class="inline-flex items-center gap-2 text-slate-400 hover:text-white font-bold text-sm transition-colors">
+                                <i class="fa-brands fa-github text-lg"></i> GitHub
+                            </a>
+                            <a href="https://smart-recruit-kappa.vercel.app/" target="_blank" rel="noopener noreferrer"
+                                id="live-smartrecruit"
+                                class="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-slate-900 px-5 py-2.5 rounded-xl font-bold text-sm transition-all">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Ver en vivo
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div
-                    class="group relative bg-gray-900/50 rounded-3xl overflow-hidden border border-white/5 hover:border-yellow-400/50 transition-all duration-500">
-                    <div class="h-56 overflow-hidden relative">
-                        <img src="./assets/img/taskmaster.png" alt="TaskMaster Preview"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-
-                        <div class="absolute top-4 right-4">
+            <!-- Grid -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="project-card reveal reveal-delay-1" id="project-taskmaster">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="./assets/img/taskmaster.png" alt="TaskMaster Preview" class="project-img">
+                        <div class="project-img-overlay"></div>
+                        <div class="absolute top-3 right-3">
                             <span
-                                class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10">
-                                Backend Project
-                            </span>
+                                class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10">Backend</span>
                         </div>
                     </div>
-
-                    <div class="p-8">
-                        <div class="flex gap-2 mb-4">
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-1.5 mb-3">
                             <span
-                                class="text-[10px] px-2 py-1 bg-purple-500/10 text-purple-500 border border-purple-500/20 rounded-md uppercase font-bold">
-                                React
-                            </span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-red-500/10 text-red-500 border border-red-500/20 rounded-md uppercase font-bold">
-                                Laravel
-                            </span>
+                                class="tag bg-purple-500/10 text-purple-400 border border-purple-500/20 py-1">React</span>
+                            <span class="tag bg-red-500/10 text-red-400 border border-red-500/20 py-1">Laravel</span>
                         </div>
-
-                        <h3 class="text-2xl font-bold mb-3 text-white">Task Master</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            Gestor de tareas avanzado desarrollado con el framework Laravel. Incluye sistema de
-                            autenticación,
-                            operaciones CRUD completas y una arquitectura robusta basada en MVC.
-                        </p>
-
-                        <a href="https://github.com/Pablo-Duenas/TaskMaster" target="_blank"
+                        <h3 class="text-xl font-extrabold text-white mb-2">Task Master</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-5">Gestor de tareas avanzado con Laravel.
+                            Autenticación, CRUD completo y arquitectura MVC robusta.</p>
+                        <a href="https://github.com/Pablo-Duenas/TaskMaster" target="_blank" id="github-taskmaster"
                             class="inline-flex items-center gap-2 text-yellow-400 font-bold text-sm hover:gap-3 transition-all">
-                            Explorar repositorio
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
+                            <i class="fa-brands fa-github"></i> Explorar repo
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
                 </div>
-                <div
-                    class="group relative bg-gray-900/50 rounded-3xl overflow-hidden border border-white/5 hover:border-fuchsia-500/50 transition-all duration-500">
-                    <div class="h-56 overflow-hidden relative">
-                        <img src="./assets/img/viralchallenge.png" alt="Viral Challenge Preview"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
 
-                        <div class="absolute top-4 right-4">
+                <div class="project-card reveal reveal-delay-2" id="project-viralchallenge">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="./assets/img/viralchallenge.png" alt="Viral Challenge Preview" class="project-img">
+                        <div class="project-img-overlay"></div>
+                        <div class="absolute top-3 right-3">
                             <span
-                                class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10">
-                                Full Stack App
-                            </span>
+                                class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10">Full
+                                Stack</span>
                         </div>
                     </div>
-
-                    <div class="p-8">
-                        <div class="flex gap-2 mb-4">
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-1.5 mb-3">
                             <span
-                                class="text-[10px] px-2 py-1 bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20 rounded-md uppercase font-bold">
-                                PHP
-                            </span>
+                                class="tag bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20 py-1">PHP</span>
                             <span
-                                class="text-[10px] px-2 py-1 bg-blue-400/10 text-blue-400 border border-blue-400/20 rounded-md uppercase font-bold">
-                                JavaScript
-                            </span>
+                                class="tag bg-blue-400/10 text-blue-400 border border-blue-400/20 py-1">JavaScript</span>
                             <span
-                                class="text-[10px] px-2 py-1 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-md uppercase font-bold">
-                                Bootstrap
-                            </span>
+                                class="tag bg-purple-500/10 text-purple-400 border border-purple-500/20 py-1">Bootstrap</span>
                         </div>
-
-                        <h3 class="text-2xl font-bold mb-3 text-white">Viral Challenge</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            Plataforma interactiva de retos diarios. Implementa una arquitectura
-                            <strong>Model-View-Controller (MVC)</strong> propia, con gestión de sesiones, validación de
-                            datos y una interfaz dinámica centrada en la experiencia de usuario.
-                        </p>
-
-                        <div class="flex items-center gap-6">
-                            <a href="https://github.com/hugocarni/VIRAL-CHALLENGE" target="_blank"
-                                class="inline-flex items-center gap-2 text-fuchsia-400 font-bold text-sm hover:gap-3 transition-all">
-                                Explorar repositorio
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </a>
-                        </div>
+                        <h3 class="text-xl font-extrabold text-white mb-2">Viral Challenge</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-5">Plataforma de retos diarios con
+                            arquitectura MVC propia, gestión de sesiones y validación de datos.</p>
+                        <a href="https://github.com/hugocarni/VIRAL-CHALLENGE" target="_blank"
+                            id="github-viralchallenge"
+                            class="inline-flex items-center gap-2 text-fuchsia-400 font-bold text-sm hover:gap-3 transition-all">
+                            <i class="fa-brands fa-github"></i> Explorar repo
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
                     </div>
                 </div>
-                <div
-                    class="group relative bg-gray-900/50 rounded-3xl overflow-hidden border border-white/5 hover:border-cyan-500/50 transition-all duration-500">
-                    <div class="h-56 overflow-hidden relative">
-                        <img src="./assets/img/smartRecruit.png" alt="SmartRecruit Preview"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
 
-                        <div class="absolute top-4 right-4">
-                            <span
-                                class="bg-black/60 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/10">
-                                Next.js App
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="p-8">
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="text-[10px] px-2 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-md uppercase font-bold">
-                                React
-                            </span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-blue-400/10 text-blue-300 border border-blue-400/20 rounded-md uppercase font-bold">
-                                TypeScript
-                            </span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md uppercase font-bold">
-                                OpenAI API
-                            </span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-slate-500/10 text-slate-300 border border-slate-500/20 rounded-md uppercase font-bold">
-                                Tailwind
-                            </span>
-                        </div>
-
-                        <h3 class="text-2xl font-bold mb-3 text-white">SmartRecruit</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            Optimizador de CVs impulsado por <strong>Inteligencia Artificial</strong>. Desarrollado con
-                            una arquitectura moderna que permite analizar vacantes en tiempo real y reestructurar
-                            perfiles profesionales para superar filtros <strong>ATS</strong>.
-                        </p>
-
-                        <div class="flex items-center gap-6">
-                            <a href="https://github.com/Pablo-Duenas/SmartRecruit" target="_blank"
-                                class="inline-flex items-center gap-2 text-cyan-400 font-bold text-sm hover:gap-3 transition-all">
-                                Explorar repositorio
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </a>
-                            <a href="https://smart-recruit-kappa.vercel.app/" target="_blank" rel="noopener noreferrer"
-                                class="bg-cyan-500 hover:bg-cyan-600 text-slate-900 px-4 py-2 rounded-lg font-bold text-sm transition-all flex items-center gap-2">
-                                Ver Proyecto
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                </svg>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-                <div
-                    class="group relative bg-gray-900/50 rounded-3xl overflow-hidden border border-white/5 hover:border-yellow-400/50 transition-all duration-500">
-                    <div class="h-56 overflow-hidden relative">
-                        <img src="./assets/img/pulsecheck.png" alt="PulseCheck Preview"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-
-                        <div class="absolute top-4 right-4 flex gap-2">
+                <div class="project-card reveal reveal-delay-3" id="project-pulsecheck">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="./assets/img/pulsecheck.png" alt="PulseCheck Preview" class="project-img">
+                        <div class="project-img-overlay"></div>
+                        <div class="absolute top-3 right-3">
                             <span
                                 class="flex items-center gap-1.5 bg-black/60 backdrop-blur-md text-yellow-400 text-[10px] px-3 py-1 rounded-full border border-yellow-400/30 font-bold">
                                 <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse"></div>
-                                REAL-TIME MONITOR
+                                Real-Time
                             </span>
                         </div>
                     </div>
-
-                    <div class="p-8">
-                        <div class="flex flex-wrap gap-2 mb-4">
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-1.5 mb-3">
+                            <span class="tag bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 py-1">React
+                                19</span>
                             <span
-                                class="text-[10px] px-2 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-md uppercase font-bold">
-                                React 19
-                            </span>
+                                class="tag bg-green-500/10 text-green-400 border border-green-500/20 py-1">Node.js</span>
                             <span
-                                class="text-[10px] px-2 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-md uppercase font-bold">
-                                Node.js
-                            </span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-orange-500/10 text-orange-400 border border-orange-500/20 rounded-md uppercase font-bold">
-                                Socket.io
-                            </span>
-                            <span
-                                class="text-[10px] px-2 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-md uppercase font-bold">
-                                Tailwind v4
-                            </span>
+                                class="tag bg-orange-500/10 text-orange-400 border border-orange-500/20 py-1">Socket.io</span>
                         </div>
-
-                        <h3 class="text-2xl font-bold mb-3 text-white italic">PulseCheck</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                            Dashboard de infraestructura que monitoriza la salud de servidores mediante
-                            <strong>WebSockets</strong>.
-                            Visualiza latencia, estado HTTP y uptime en tiempo real para una administración eficiente.
-                        </p>
-
-                        <div class="flex items-center gap-6">
-                            <a href="https://github.com/Pablo-Duenas/pulse-check" target="_blank"
-                                class="inline-flex items-center gap-2 text-yellow-400 font-bold text-sm hover:gap-3 transition-all">
-                                Explorar repositorio
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </a>
-                        </div>
+                        <h3 class="text-xl font-extrabold text-white mb-2 italic">PulseCheck</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-5">Dashboard que monitoriza servidores con
+                            WebSockets. Latencia, uptime y estado HTTP en tiempo real.</p>
+                        <a href="https://github.com/Pablo-Duenas/pulse-check" target="_blank" id="github-pulsecheck"
+                            class="inline-flex items-center gap-2 text-yellow-400 font-bold text-sm hover:gap-3 transition-all">
+                            <i class="fa-brands fa-github"></i> Explorar repo
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="habilidades" class="py-24">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-16">Stack Tecnológico</h2>
-            <div class="flex flex-wrap justify-center gap-8">
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-yellow-400 group-hover:shadow-[0_0_30px_rgba(234,179,8,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                            class="w-10 h-10" alt="JS">
-                    </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">JavaScript</span>
-                </div>
+    <!-- HABILIDADES -->
+    <section id="habilidades" class="py-28">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16 reveal">
+                <div class="section-label">Tecnologías</div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white">Stack Tecnológico</h2>
+                <p class="text-slate-500 mt-3 text-sm">Las herramientas con las que construyo soluciones</p>
+            </div>
 
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-indigo-400 group-hover:shadow-[0_0_30px_rgba(79,70,229,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-                            class="w-10 h-10" alt="PHP">
+            <div class="mb-12 reveal">
+                <h3 class="code-font text-yellow-400/60 text-xs font-bold tracking-widest uppercase mb-6">// Frontend
+                </h3>
+                <div class="flex flex-wrap gap-6">
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                class="w-9 h-9" alt="JavaScript"></div><span class="skill-label">JavaScript</span>
                     </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">PHP</span>
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                                class="w-9 h-9" alt="TypeScript"></div><span class="skill-label">TypeScript</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                                class="w-9 h-9" alt="React"></div><span class="skill-label">React</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+                                class="w-9 h-9 invert" alt="Next.js"></div><span class="skill-label">Next.js</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+                                class="w-9 h-9" alt="Tailwind"></div><span class="skill-label">Tailwind</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                class="w-9 h-9" alt="HTML5"></div><span class="skill-label">HTML5</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                class="w-9 h-9" alt="CSS3"></div><span class="skill-label">CSS3</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+                                class="w-9 h-9" alt="Bootstrap"></div><span class="skill-label">Bootstrap</span>
+                    </div>
                 </div>
+            </div>
 
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-cyan-400 group-hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
-                            class="w-10 h-10" alt="Tailwind">
+            <div class="reveal reveal-delay-1">
+                <h3 class="code-font text-pink-400/60 text-xs font-bold tracking-widest uppercase mb-6">// Backend &amp;
+                    Database</h3>
+                <div class="flex flex-wrap gap-6">
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+                                class="w-9 h-9" alt="PHP"></div><span class="skill-label">PHP</span>
                     </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Tailwind</span>
-                </div>
-
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-blue-500 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                            class="w-10 h-10" alt="SQL">
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
+                                class="w-9 h-9" alt="Laravel"></div><span class="skill-label">Laravel</span>
                     </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">SQL</span>
-                </div>
-
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-red-500 group-hover:shadow-[0_0_30px_rgba(239,68,68,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
-                            class="w-10 h-10" alt="Java">
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                                class="w-9 h-9" alt="Node.js"></div><span class="skill-label">Node.js</span>
                     </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Java</span>
-                </div>
-
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-cyan-300 group-hover:shadow-[0_0_30px_rgba(103,232,249,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                            class="w-10 h-10" alt="React">
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                class="w-9 h-9" alt="Python"></div><span class="skill-label">Python</span>
                     </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">React</span>
-                </div>
-
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-blue-400 group-hover:shadow-[0_0_30px_rgba(96,165,250,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                            class="w-10 h-10" alt="Python">
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                                class="w-9 h-9" alt="Java"></div><span class="skill-label">Java</span>
                     </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Python</span>
-                </div>
-
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-red-600 group-hover:shadow-[0_0_30px_rgba(220,38,38,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
-                            class="w-10 h-10" alt="Laravel">
+                    <div class="skill-item">
+                        <div class="skill-icon-wrap"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                class="w-9 h-9" alt="MySQL"></div><span class="skill-label">MySQL</span>
                     </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Laravel</span>
-                </div>
-
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-orange-500 group-hover:shadow-[0_0_30px_rgba(249,115,22,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-                            class="w-10 h-10" alt="HTML">
-                    </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">HTML5</span>
-                </div>
-
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-blue-600 group-hover:shadow-[0_0_30px_rgba(37,99,235,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-                            class="w-10 h-10" alt="CSS">
-                    </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">CSS3</span>
-                </div>
-
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-purple-500 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
-                            class="w-10 h-10" alt="Bootstrap">
-                    </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Bootstrap</span>
-                </div>
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-blue-500 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-                            class="w-10 h-10" alt="TypeScript">
-                    </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">TypeScript</span>
-                </div>
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-green-500 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                            class="w-10 h-10" alt="NodeJS">
-                    </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Node.js</span>
-                </div>
-                <div class="group flex flex-col items-center">
-                    <div
-                        class="w-20 h-20 glass rounded-2xl flex items-center justify-center mb-4 group-hover:border-white group-hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-300">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
-                            class="w-10 h-10 invert" alt="Next.js">
-                    </div>
-                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition">Next.js</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- CONTACTO -->
+    <section id="contacto" class="py-28 bg-black/20">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16 reveal">
+                <div class="section-label">Contacto</div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white">Trabajemos juntos</h2>
+                <p class="text-slate-500 mt-3 text-sm max-w-md mx-auto">¿Tienes un proyecto en mente? Estoy disponible
+                    para colaboraciones, trabajos freelance o posiciones full-time.</p>
+            </div>
 
-    <footer class="py-12 border-t border-white/5 text-center">
-        <p class="text-gray-500 text-sm italic">
-            Diseñado y desarrollado por Pablo Dueñas © 2026
-        </p>
+            <div class="grid md:grid-cols-2 gap-6 reveal reveal-delay-1">
+                <a href="https://github.com/Pablo-Duenas" target="_blank" id="contact-github"
+                    class="contact-link group">
+                    <div class="contact-icon bg-white/5 text-white"><i class="fa-brands fa-github"></i></div>
+                    <div>
+                        <p class="font-bold text-white text-sm">GitHub</p>
+                        <p class="text-slate-500 text-xs">@Pablo-Duenas</p>
+                    </div>
+                    <i
+                        class="fa-solid fa-arrow-right ml-auto text-slate-600 group-hover:text-yellow-400 transition-colors"></i>
+                </a>
+
+                <a href="https://www.linkedin.com/in/pablo-due%C3%B1as-diez/" target="_blank" id="contact-linkedin"
+                    class="contact-link group">
+                    <div class="contact-icon bg-blue-500/10 text-blue-400"><i class="fa-brands fa-linkedin-in"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-white text-sm">LinkedIn</p>
+                        <p class="text-slate-500 text-xs">Pablo Dueñas Diez</p>
+                    </div>
+                    <i
+                        class="fa-solid fa-arrow-right ml-auto text-slate-600 group-hover:text-yellow-400 transition-colors"></i>
+                </a>
+
+                <a id="contact-email" class="contact-link group">
+                    <div class="contact-icon bg-yellow-400/10 text-yellow-400"><i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-white text-sm">Email</p>
+                        <p class="text-slate-500 text-xs">pablodudi77@gmail.com</p>
+                    </div>
+                    <i
+                        class="fa-solid fa-arrow-right ml-auto text-slate-600 group-hover:text-yellow-400 transition-colors"></i>
+                </a>
+
+                <a href="./assets/pdf/CVPabloDueñasDiez.pdf" download="CV_Pablo_Duenas_2026.pdf" id="contact-cv"
+                    class="contact-link group">
+                    <div class="contact-icon bg-pink-500/10 text-pink-400"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div>
+                        <p class="font-bold text-white text-sm">Currículum</p>
+                        <p class="text-slate-500 text-xs">Descarga mi CV actualizado</p>
+                    </div>
+                    <i
+                        class="fa-solid fa-download ml-auto text-slate-600 group-hover:text-yellow-400 transition-colors"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-10 border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-400 to-pink-500 flex items-center justify-center font-black text-black text-xs">
+                        P</div>
+                    <span class="text-slate-500 text-sm">Pablo Dueñas Diez <span class="text-slate-700">·</span>
+                        2026</span>
+                </div>
+                <p class="text-slate-700 text-xs code-font">// Diseñado y desarrollado con ❤️</p>
+                <div class="flex gap-3">
+                    <a href="https://github.com/Pablo-Duenas" target="_blank" class="footer-social"
+                        aria-label="GitHub"><i class="fa-brands fa-github text-sm"></i></a>
+                    <a href="https://www.linkedin.com/in/pablo-due%C3%B1as-diez/" target="_blank" class="footer-social"
+                        aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script>
-        const btn = document.getElementById('menu-btn');
-        // Aquí podrías añadir un menú móvil animado más pro
+        // CANVAS BACKGROUND
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [];
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * W;
+                this.y = Math.random() * H;
+                this.size = Math.random() * 1.2 + 0.3;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.alpha = Math.random() * 0.4 + 0.1;
+                this.color = Math.random() > 0.5 ? '245,200,66' : '168,85,247';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + this.color + ',' + this.alpha + ')';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+        (function animate() {
+            ctx.clearRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(255,255,255,0.018)';
+            ctx.lineWidth = 1;
+            const gridSize = 80;
+            for (let x = 0; x < W; x += gridSize) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+            }
+            for (let y = 0; y < H; y += gridSize) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+            }
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        })();
+
+        // SCROLL PROGRESS
+        const progress = document.getElementById('nav-progress');
+        window.addEventListener('scroll', () => {
+            const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            progress.style.width = pct + '%';
+        });
+
+        // NAV SCROLL STYLE
+        const mainNav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            mainNav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // ACTIVE NAV LINKS
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const active = document.querySelector('#link-' + entry.target.id);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { threshold: 0.4 });
+        sections.forEach(s => observer.observe(s));
+
+        // MOBILE MENU
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        let menuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+            menuIcon.className = menuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.remove('open');
+                menuIcon.className = 'fa-solid fa-bars';
+            });
+        });
+
+        // TYPING EFFECT
+        const phrases = [
+            'interfaces modernas.',
+            'experiencias digitales.',
+            'backends robustos.',
+            'soluciones escalables.',
+        ];
+        let phraseIndex = 0, charIndex = 0, deleting = false;
+        const typingEl = document.getElementById('typing-text');
+
+        function type() {
+            const current = phrases[phraseIndex];
+            if (!deleting) {
+                typingEl.textContent = current.slice(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === current.length) {
+                    deleting = true;
+                    setTimeout(type, 1800);
+                    return;
+                }
+            } else {
+                typingEl.textContent = current.slice(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    deleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                }
+            }
+            setTimeout(type, deleting ? 50 : 80);
+        }
+        type();
+
+        // SCROLL REVEAL
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // COUNTER ANIMATION
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.dataset.target);
+                    let count = 0;
+                    const step = Math.ceil(target / 30);
+                    const timer = setInterval(() => {
+                        count = Math.min(count + step, target);
+                        el.textContent = count + '+';
+                        if (count >= target) clearInterval(timer);
+                    }, 50);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
     </script>
 </body>
 
